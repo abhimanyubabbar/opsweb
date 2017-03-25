@@ -1,10 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
+import Cluster from  './components/clusters/Cluster';
 
 class App extends React.Component {
   render () {
     return (
-      <div>React with hot reloading is the cats pajamas, changes!, yo yo!</div>
+      <div><Cluster></Cluster></div>
     );
   }
 }

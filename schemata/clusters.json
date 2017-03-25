@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "definitions": {
+
+    "cluster_config": {
+      "type": "object",
+      "properties": {
+        "loadbalancers": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "image_id": { "type": "string" },
+            "image_name": { "type": "string"}
+          },
+          "required": [
+            "image_id",
+            "image_name"
+          ]
+        },
+        "user_data": { "type": "string" },
+        "min_size": { "type": "integer" },
+        "instance_type": { "type": "string" },
+        "desired_size": { "type": "integer" },
+        "max_size": { "type": "integer" }
+      },
+      "required" : [
+        "loadbalancers",
+        "image",
+        "user_data",
+        "min_size",
+        "instance_type",
+        "desired_size",
+        "max_size"
+      ]
+    },
+
+    "cluster": {
+      "type": "object",
+      "properties": {
+        "cluster_name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "active_services_count": {
+          "type": "integer"
+        },
+        "registered_container_instances_count": {
+          "type": "integer"
+        },
+        "cluster_config": {
+          "type": "#refs/definitions/cluster_config"
+        }
+      },
+      "required": [
+        "cluster_name",
+        "status",
+        "cluster_config",
+        "active_services_count"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "clusters": {
+      "type": "array",
+      "items": {
+        "type": "#refs/definitions/cluster"
+      }
+    }
+  },
+  "required": [
+    "clusters"
+  ]
+}
